@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fooseonline/assets/app_color.dart';
 import 'package:fooseonline/assets/app_text.dart';
@@ -33,28 +34,81 @@ class _LandingPageState extends State<LandingPage> {
                   ),
                   child: Column(
                     children: [
-                      Container(
-                        height: 350,
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-                          color: Colors.grey
-                        ),
-                      ),
-                      SizedBox(height: 5,),
-                      Row(
-                        children: [
-                          AppText(text: "size: XL"),
+                      Stack(
+
+                        children:[
                           Container(
-                            child: Row(
+                          height: 385,
+                          decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+                              color: Colors.grey
+                          ),
+                        ),
+                          Container(
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.only(left: MediaQuery.of(context).size.width-120,top: 25),
+                            width: 100,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.amber
+                            ),
+                            child: AppText(text: "Available",color: Colors.black,),
+                          )
+                        ]
+                      ),
+
+                      Container(
+                        padding: EdgeInsets.only(left: 10,right: 10,top: 20),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                AppText(text: "GHC",size: 10,color: Colors.red,),
-                                AppText(text: "30.00",size: 17,color: Colors.red,),
+                                AppText(text: "size: XL"),
+                                Container(
+                                  child: Row(
+                                    children: [
+                                      AppText(text: "GHC",size: 10,color: Colors.red,),
+                                      AppText(text: "30.00",size: 17,color: Colors.red,),
+                                    ],
+                                  ),
+                                )
 
                               ],
                             ),
-                          )
-                          
-                        ],
+                            SizedBox(height: 20,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  alignment: Alignment.center,
+                                  width: 150,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: Colors.black,
+                                  ),
+                                  child: AppText(text: "Buy Now",color: Colors.white,size: 14,),
+                                ),
+                                Container(
+                                  alignment: Alignment.center,
+                                  width: 150,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: Colors.white,
+                                    border: Border.all(
+                                      color: Colors.black,
+                                      width: 1.5
+                                    ),
+                                  ),
+                                  child: AppText(text: "Buy + More",color: Colors.black,size: 14,),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
                       )
                     ],
                   ),
