@@ -48,19 +48,25 @@ class _PostState extends State<Post> {
                           )
                         ),
                       ),
-                      Container(
-                        child: Container(
-                          alignment: Alignment.center,
-                          margin: EdgeInsets.only(left: MediaQuery.of(context).size.width-120,top: 25),
-                          width: 100,
-                          height: 40,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.amberAccent.withOpacity(.6)
-                          ),
-                          child: AppText(text: "Available",color: Colors.black,),
-                        ),
-                      )
+
+                      //the available tag on each post
+
+                      // Container(
+                      //   child: Container(
+                      //     padding: EdgeInsets.only(right: 20,top: 20),
+                      //     alignment: Alignment.topRight,
+                      //     child: Container(
+                      //       alignment: Alignment.center,
+                      //       width: 100,
+                      //       height: 40,
+                      //       decoration: BoxDecoration(
+                      //           borderRadius: BorderRadius.circular(15),
+                      //           color: Colors.amberAccent.withOpacity(.6)
+                      //       ),
+                      //       child: AppText(text: "Available",color: Colors.black,),
+                      //     ),
+                      //   ),
+                      // )
                     ]
                 ),
 
