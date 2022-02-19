@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fooseonline/assets/app_text.dart';
+import 'package:fooseonline/connections/contacts.dart';
 
 class ContactDialog{
 
-  ContactDalogBox(BuildContext context) {
+  createContactDialog(BuildContext context) {
 
     return showDialog (
 
@@ -17,50 +18,51 @@ class ContactDialog{
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                height: 80,
-                width: 80,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  image: DecorationImage(
-                    image: AssetImage("images/whatsapp logo.png")
-                  )
+              GestureDetector(
+                onTap: (){
+                  Contact().openWhatsappChat();
+                },
+                child: Container(
+                  height: 80,
+                  width: 80,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    image: DecorationImage(
+                      image: AssetImage("images/whatsapp logo.png")
+                    )
+                  ),
                 ),
               ),
-              Container(
-                height: 80,
-                width: 80,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                    color: Colors.grey,
-                    image: DecorationImage(
-                        image: AssetImage("images/whatsapp logo.png")
-                    )
+              GestureDetector(
+                onTap: (){
+                  Contact().openPhone();
+                },
+                child: Container(
+                  height: 80,
+                  width: 80,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                      color: Colors.grey,
+                      image: DecorationImage(
+                          image: AssetImage("images/whatsapp logo.png")
+                      )
+                  ),
                 ),
               )
             ],
           ),
         ),
         actions: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(
-                    width: 2,
-                    color: Colors.black
-                  )
-                ),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+            ),
 
-                child:TextButton(onPressed: () {  },
-                  child: AppText(text: "Contact",color: Colors.black,),) ,
-              ),
-              TextButton(onPressed: () {  },
-                child: AppText(text: "cancel",color: Colors.red,),)
-            ],
-          )
+            child:TextButton(onPressed: () {
+              return Navigator.pop(context);
+            },
+              child: AppText(text: "Cancel",color: Colors.red,),) ,
+          ),
 
         ],
         elevation: 24,

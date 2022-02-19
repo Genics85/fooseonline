@@ -54,12 +54,11 @@ class _SideBarState extends State<SideBar> {
           )),
 
           GestureDetector(
-            
             onTap: (){
-              return ContactDialog().ContactDalogBox(context);
+              return ContactDialog().createContactDialog(context);
             },
             child: Container(
-              margin: EdgeInsets.only(top: 10),
+              margin:EdgeInsets.only(bottom: 15),
               width: 50,
               height:50,
               decoration: BoxDecoration(
