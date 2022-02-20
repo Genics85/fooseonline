@@ -42,13 +42,12 @@ class ContactDialog{
                   width: 80,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                      color: Colors.grey,
-                      image: DecorationImage(
-                          image: AssetImage("images/whatsapp logo.png")
-                      )
+                      color: Colors.grey.shade200,
+
                   ),
+                  child: Icon(Icons.phone_forwarded,size: 40,color: Colors.black54,),
                 ),
-              )
+             )
             ],
           ),
         ),
