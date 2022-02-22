@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   async: ^2.8.2
   url_launcher: ^6.0.20
+  state_set: ^3.3.0
 
 dev_dependencies:
   flutter_test:

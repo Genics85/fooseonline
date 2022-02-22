@@ -1,16 +1,66 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:state_set/state_set.dart';
 import 'app_text.dart';
 
 class Post extends StatefulWidget {
-  const Post({Key? key}) : super(key: key);
+
+  Post({Key? key}) : super(key: key);
+
+  int selectedPost=2;
+
+  unisexSelected(){
+    _PostState? state;
+    state=StateSet.to<_PostState>();
+
+    state?.setState(() {
+      selectedPost=0;
+    });
+  }
+
+  malesSelected(){
+    _PostState? state;
+    state=StateSet.to<_PostState>();
+
+    state?.setState(() {
+    selectedPost=1;
+    });
+  }
+
+  femalesSelected(){
+    _PostState? state;
+    state=StateSet.to<_PostState>();
+
+    state?.setState(() {
+      selectedPost=2;
+    });
+  }
+
+  kidsSelected(){
+    _PostState? state;
+    state=StateSet.to<_PostState>();
+
+    state?.setState(() {
+      selectedPost=3;
+    });
+  }
+
+
+  List selection=[
+    "images/unisex.jpg",
+    "images/shirt2.jpg",
+    "images/females.jpg",
+    "images/kids.jpg",
+  ];
 
   @override
   _PostState createState() => _PostState();
 }
 
-class _PostState extends State<Post> {
+class _PostState extends State<Post> with StateSet {
+   Post post= Post();
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,10 +90,10 @@ class _PostState extends State<Post> {
                     children:[
                       Container(
                         height: 385,
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                             borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
                             color: Colors.grey,
-                          image: DecorationImage(image: AssetImage("images/shirt2.jpg"),
+                          image: DecorationImage(image: AssetImage(post.selection[post.selectedPost]),
                             fit: BoxFit.cover
                           )
                         ),

@@ -140,6 +140,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.10.0"
+  state_set:
+    dependency: "direct main"
+    description:
+      name: state_set
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.3.0"
   stream_channel:
     dependency: transitive
     description:

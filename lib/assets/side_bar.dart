@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:fooseonline/assets/app_color.dart';
 import 'package:fooseonline/assets/contact_dialog.dart';
+import 'package:fooseonline/assets/post.dart';
+import 'package:state_set/state_set.dart';
 
 
 class SideBar extends StatefulWidget {
-  const SideBar({Key? key}) : super(key: key);
+   SideBar({Key? key}) : super(key: key);
 
-  @override
-  _SideBarState createState() => _SideBarState();
-}
-
-class _SideBarState extends State<SideBar> {
+   int selected=0;
 
   List <String> sideBarlogos=[
     "images/gender.png",
@@ -19,7 +16,21 @@ class _SideBarState extends State<SideBar> {
     "images/kids logo.png",
   ];
 
-  int selected=0;
+  List   selectors=[
+    Post().unisexSelected(),
+    Post().malesSelected(),
+    Post().femalesSelected(),
+    Post().kidsSelected()
+  ];
+
+
+  @override
+  _SideBarState createState() => _SideBarState();
+}
+
+class _SideBarState extends State<SideBar> with StateSet {
+  SideBar sidebar=SideBar();
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,25 +38,28 @@ class _SideBarState extends State<SideBar> {
       child: Column(
         children: [
           Expanded(child: Column(
-              children: List.generate(sideBarlogos.length, (sideBarIndex){
+              children: List.generate(sidebar.sideBarlogos.length, (sideBarIndex){
 
                 void onTap(){
                   setState(() {
-                    selected=sideBarIndex;
+                    sidebar.selected=sideBarIndex;
                   });
                 }
 
                 return GestureDetector(
-                  onTap: onTap,
+                  onTap: (){
+                    onTap();
+
+                  },
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 10,),
                     width: 50,
                     height:50,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(11),
-                        color:selected==sideBarIndex?Colors.amber.withOpacity(.8):Colors.grey.withOpacity(.5),
+                        color:sidebar.selected==sideBarIndex?Colors.amber.withOpacity(.8):Colors.grey.withOpacity(.5),
                         image: DecorationImage(
-                            image: AssetImage(sideBarlogos[sideBarIndex])
+                            image: AssetImage(sidebar.sideBarlogos[sideBarIndex])
                         )
                     ),
                   ),
@@ -76,5 +90,6 @@ class _SideBarState extends State<SideBar> {
     );
   }
 }
+
 
 
