@@ -11,7 +11,7 @@ class ContactDialog{
         context: context, builder: (context){
 
       return AlertDialog(
-        title: AppText(text:"Contact us on:",color: Colors.black,),
+        title: AppText(text:"Contact us via:",color: Colors.black,),
         content: Container(
           padding: EdgeInsets.only(left: 20,right: 20),
           height: 100,
@@ -45,7 +45,7 @@ class ContactDialog{
                       color: Colors.grey.shade200,
 
                   ),
-                  child: Icon(Icons.phone_forwarded,size: 40,color: Colors.black54,),
+                  child: Icon(Icons.phone_forwarded,size: 40,color: Colors.blue,),
                 ),
              )
             ],

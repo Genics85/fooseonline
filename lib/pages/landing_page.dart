@@ -1,9 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fooseonline/assets/app_button.dart';
 import 'package:fooseonline/assets/app_color.dart';
-import 'package:fooseonline/assets/post.dart';
+import 'package:fooseonline/assets/app_text.dart';
+import 'package:fooseonline/assets/buy_more_button.dart';
+import 'package:fooseonline/assets/buy_now_button.dart';
+import 'package:fooseonline/assets/contact_dialog.dart';
 import 'package:fooseonline/assets/search_space.dart';
-import 'package:fooseonline/assets/side_bar.dart';
+
 
 class LandingPage extends StatefulWidget {
   const LandingPage({Key? key}) : super(key: key);
@@ -13,6 +17,19 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
+  int selectedButton=0;
+  int unisexIndex=0;
+  int maleIndex=1;
+  int femaleIndex=2;
+  int kidsIndex=3;
+
+  List <String> img=[
+    "images/unisex.jpg",
+    "images/shirt2.jpg",
+    "images/females.jpg",
+    "images/kids.jpg",
+  ];
+  
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -29,7 +46,68 @@ class _LandingPageState extends State<LandingPage> {
               ListView.builder(
                   itemCount: 20,
                   itemBuilder: (BuildContext context , index){
-                    return Post();
+                    return Container(
+                      margin: const EdgeInsets.only(top: 20),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: 500,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 4,
+                                      offset: const Offset(0,2)
+                                  )
+                                ]
+                            ),
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: 385,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.only(topLeft: const Radius.circular(20), topRight: const Radius.circular(20)),
+                                      color: Colors.grey,
+                                      image: DecorationImage(image: AssetImage(img[selectedButton]),
+                                          fit: BoxFit.cover
+                                      )
+                                  ),
+                                ),
+                                const SizedBox(height: 10,),
+                                
+                                Container(
+                                  padding: EdgeInsets.all(10),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          AppText(text: "size:XL",size: 18,),
+                                          AppText(text: "GHc: 40",color: Colors.red,)
+                                        ],
+                                      ),
+                                      const SizedBox(height: 20,),
+
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          BuyNowButton(),
+                                          BuyMoreButton()
+                                        ],
+                                      )
+                                    ],
+                                  )
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    );
                   }),
               Container(
                 padding: EdgeInsets.only(top: 20),
@@ -39,7 +117,61 @@ class _LandingPageState extends State<LandingPage> {
               Container(
                 alignment: Alignment.bottomRight,
                 margin: EdgeInsets.only(top:MediaQuery.of(context).size.height*.5,right: 5),
-                child: SideBar()
+                child: Column(
+                  children: [
+                    //Unisex button
+                    GestureDetector(
+                      onTap:(){
+                        setState(() {
+                          selectedButton=unisexIndex;
+                        });
+                      },
+                      child:Buttons(
+                        img:"gender.png",
+                        color: selectedButton==unisexIndex?AppColors.activeButton:AppColors.inActiveButton),
+                    ),
+                    //males button
+                    GestureDetector(
+                        onTap: (){
+                          setState(() {
+                            selectedButton=maleIndex;
+                          });
+                        },
+                        child: Buttons(
+                            img:"male logo.png",
+                        color: selectedButton==maleIndex?AppColors.activeButton:AppColors.inActiveButton,)
+                    ),
+                    //females button
+                    GestureDetector(
+                        onTap: (){
+                          setState(() {
+                            selectedButton=femaleIndex;
+                          });
+                        },
+                        child: Buttons(
+                          img:"female logo.png",
+                          color: selectedButton==femaleIndex?AppColors.activeButton:AppColors.inActiveButton,)
+                    ),
+                    //kids button
+                    GestureDetector(
+                        onTap: (){
+                          setState(() {
+                            selectedButton=kidsIndex;
+                          });
+                        },
+                        child: Buttons(
+                          img:"kids logo.png",
+                          color: selectedButton==kidsIndex?AppColors.activeButton:AppColors.inActiveButton,)
+                    ),
+                    const SizedBox(height: 20),
+                    //Contact button
+                    GestureDetector(
+                        onTap: (){
+                          return ContactDialog().createContactDialog(context);
+                        },
+                        child: Buttons(img:"phone.png",))
+                  ],
+                )
               )
             ]
           )

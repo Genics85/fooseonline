@@ -9,7 +9,7 @@ class AppText extends StatelessWidget {
   const AppText({Key? key,
     required this.text,
     this.size=16,
-    this.color=AppColors.textColor1
+    this.color=Colors.black54
   }) : super(key: key);
 
   @override
