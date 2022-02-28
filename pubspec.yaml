@@ -37,6 +37,10 @@ dependencies:
   async: ^2.8.2
   url_launcher: ^6.0.20
   state_set: ^3.3.0
+  firebase_core: ^1.12.0
+  firebase: ^9.0.2
+  cloud_firestore: ^3.1.9
+  firebase_auth: ^3.3.8
 
 dev_dependencies:
   flutter_test:

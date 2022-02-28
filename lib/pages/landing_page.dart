@@ -7,6 +7,7 @@ import 'package:fooseonline/assets/buy_more_button.dart';
 import 'package:fooseonline/assets/buy_now_button.dart';
 import 'package:fooseonline/assets/contact_dialog.dart';
 import 'package:fooseonline/assets/search_space.dart';
+import 'package:fooseonline/connections/onlinePosts.dart';
 
 
 class LandingPage extends StatefulWidget {
@@ -17,6 +18,9 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
+
+  Future size(int) async {}
+
   int selectedButton=0;
   int unisexIndex=0;
   int maleIndex=1;
@@ -86,7 +90,7 @@ class _LandingPageState extends State<LandingPage> {
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
-                                          AppText(text: "size:XL",size: 18,),
+                                          AppText(text: OnlinePosts().size.toString(),size: 18,),
                                           AppText(text: "GHc: 40",color: Colors.red,)
                                         ],
                                       ),
