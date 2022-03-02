@@ -90,7 +90,7 @@ class _LandingPageState extends State<LandingPage> {
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
-                                          AppText(text: OnlinePosts().size.toString(),size: 18,),
+                                          AppText(text:"Size:XL",size: 18,),
                                           AppText(text: "GHc: 40",color: Colors.red,)
                                         ],
                                       ),
