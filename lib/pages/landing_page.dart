@@ -55,7 +55,7 @@ class _LandingPageState extends State<LandingPage> {
               child: Stack(
                 children:[
                   ListView.builder(
-                      itemCount: snapshot.data.docs.lenght,
+                      itemCount: snapshot.data.docs.length,
                       itemBuilder: (BuildContext context , index){
                         return Container(
                           margin: const EdgeInsets.only(top: 20),
