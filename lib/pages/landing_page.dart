@@ -98,7 +98,7 @@ class _LandingPageState extends State<LandingPage> {
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
                                               AppText(text:"Size:XL",size: 18,),
-                                              AppText(text: "GHc: 40",color: Colors.red,)
+                                              AppText(text: "GHc:${snapshot.data.docs[index]["price"]} ",color: Colors.red,)
                                             ],
                                           ),
                                           const SizedBox(height: 20,),
@@ -106,7 +106,11 @@ class _LandingPageState extends State<LandingPage> {
                                           Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
-                                              BuyNowButton(),
+                                              GestureDetector(
+                                                  onTap:(){
+
+                                                  },
+                                                  child: BuyNowButton()),
                                               BuyMoreButton()
                                             ],
                                           )
