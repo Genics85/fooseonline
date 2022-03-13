@@ -97,7 +97,7 @@ class _LandingPageState extends State<LandingPage> {
                                           Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
-                                              AppText(text:"Size:XL",size: 18,),
+                                              AppText(text:"Size:${snapshot.data.docs[index]["size"]}",size: 18,),
                                               AppText(text: "GHc:${snapshot.data.docs[index]["price"]} ",color: Colors.red,)
                                             ],
                                           ),
