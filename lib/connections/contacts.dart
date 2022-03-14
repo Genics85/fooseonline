@@ -1,11 +1,9 @@
-import 'package:async/async.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 class Contact{
-  final url="https://wa.me/0547800363";
+  final url="https://wa.me/233547800363?text=Hey I'm texting you from my app";
 
-  final phoneNumber="0547800363";
+  final phoneNumber="233547800363";
 
   void openWhatsappChat() async {
 

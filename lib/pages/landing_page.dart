@@ -20,6 +20,13 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage> {
 
+  List  firebaseSnapshots=[
+    FirebaseFirestore.instance.collection("posts").where("sex", whereIn: ["Male","Female"]).snapshots(),
+    FirebaseFirestore.instance.collection("posts").where("sex",isEqualTo: "Male").snapshots(),
+    FirebaseFirestore.instance.collection("posts").where("sex", isEqualTo:"Female").snapshots(),
+    FirebaseFirestore.instance.collection("posts").where("sex", isEqualTo: "Kids").snapshots()
+  ];
+
   int selectedButton=0;
   int unisexIndex=0;
   int maleIndex=1;
@@ -39,7 +46,7 @@ class _LandingPageState extends State<LandingPage> {
       child: Scaffold(
 
         body: StreamBuilder<Object>(
-          stream: FirebaseFirestore.instance.collection("posts").snapshots(),
+          stream: firebaseSnapshots[selectedButton],
           builder: (BuildContext context,AsyncSnapshot snapshot) {
             if (!snapshot.hasData) {
               return Center(
@@ -83,13 +90,17 @@ class _LandingPageState extends State<LandingPage> {
                                       decoration: BoxDecoration(
                                           borderRadius: BorderRadius.only(topLeft: const Radius.circular(20), topRight: const Radius.circular(20)),
                                           color: Colors.grey,
-                                          image: DecorationImage(image: AssetImage(img[selectedButton]),
-                                              fit: BoxFit.cover
+                                          image: DecorationImage(image: NetworkImage("${snapshot.data.docs[index]["imageUrl"]}"),
+
+                                              //     .collection("posts")
+                                              // .where("sex", "==", "Kids")
+
+                                          fit: BoxFit.cover
                                           )
                                       ),
                                     ),
                                     const SizedBox(height: 10,),
-                                    
+
                                     Container(
                                       padding: EdgeInsets.all(10),
                                       child: Column(
@@ -129,11 +140,12 @@ class _LandingPageState extends State<LandingPage> {
                     alignment: Alignment.topCenter,
                       child: Search()
                   ),
-                  
-                  Container(
-                    alignment: Alignment.bottomRight,
-                    margin: EdgeInsets.only(top:MediaQuery.of(context).size.height*.5,right: 5),
-                    child: SingleChildScrollView(
+
+                  Positioned(
+                    top: MediaQuery.of(context).size.height-350,
+                    left: MediaQuery.of(context).size.width-55,
+                    child: Container(
+                      padding: EdgeInsets.only( right: 5),
                       child: Column(
                         children: [
                           //Unisex button
@@ -188,8 +200,8 @@ class _LandingPageState extends State<LandingPage> {
                               },
                               child: Buttons(img:"phone.png",))
                         ],
-                      ),
-                    )
+                      )
+                    ),
                   )
                 ]
               )
