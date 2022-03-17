@@ -8,7 +8,8 @@ import 'package:fooseonline/assets/buy_more_button.dart';
 import 'package:fooseonline/assets/buy_now_button.dart';
 import 'package:fooseonline/assets/contact_dialog.dart';
 import 'package:fooseonline/assets/search_space.dart';
-import 'package:fooseonline/connections/onlinePosts.dart';
+import 'package:fooseonline/payment/paystack_payment.dart';
+
 
 
 class LandingPage extends StatefulWidget {
@@ -19,6 +20,7 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
+  String email="eugeneamo85@gmail.com";
 
   List  firebaseSnapshots=[
     FirebaseFirestore.instance.collection("posts").where("sex", whereIn: ["Male","Female"]).snapshots(),
@@ -119,7 +121,8 @@ class _LandingPageState extends State<LandingPage> {
                                             children: [
                                               GestureDetector(
                                                   onTap:(){
-
+                                                    debugPrint("buy tapper");
+                                                    MakePayment(ctx: context,email: email,price: 40).chargeCardAndMakePayment();
                                                   },
                                                   child: BuyNowButton()),
                                               BuyMoreButton()
