@@ -10,8 +10,13 @@ import 'package:flutter/material.dart';
 class Search extends StatelessWidget {
 
   TextEditingController controller= TextEditingController();
+  var searchIconButtonFunc;
+  Icon searchButtonIcon;
 
-  Search({Key? key,required this.controller}) : super(key: key);
+  Search({Key? key,
+    required this.controller,
+  required this.searchButtonIcon,
+  this.searchIconButtonFunc}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +35,8 @@ class Search extends StatelessWidget {
           border: InputBorder.none,
           focusColor: Colors.black,
           suffixIcon: IconButton(
-            icon: Icon(Icons.search,color: Colors.black,),
-            onPressed: () {  },
+            icon: searchButtonIcon,
+            onPressed: searchIconButtonFunc,
           )
         ),
       ),

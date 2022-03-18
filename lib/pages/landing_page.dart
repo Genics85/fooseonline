@@ -26,7 +26,10 @@ class _LandingPageState extends State<LandingPage> {
 
   TextEditingController searchController=TextEditingController();
 
-  
+
+  Icon searchButtonIcon1=Icon(Icons.search,color: Colors.black45,);
+  Icon searchButtonIcon2=Icon(Icons.cancel_outlined,color: Colors.black45,);
+
   int selectedButton=0;
   int unisexIndex=0;
   int maleIndex=1;
@@ -41,9 +44,23 @@ class _LandingPageState extends State<LandingPage> {
   ];
 
   _onSearchChange(){
+    if(searchController.text != ""){
+      setState(() {
+        selectedButton=4;
+      });
+    }else{
+      setState(() {
+        selectedButton=unisexIndex;
+      });
+    }
+
+  }
+
+  searchControllerClear(){
     setState(() {
-      selectedButton=4;
+      searchController.text="";
     });
+
   }
 
   @override
@@ -53,12 +70,6 @@ class _LandingPageState extends State<LandingPage> {
 
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    searchController.dispose();
-    searchController.removeListener(_onSearchChange);
-  }
   
   @override
   Widget build(BuildContext context) {
@@ -169,7 +180,11 @@ class _LandingPageState extends State<LandingPage> {
                     padding: EdgeInsets.only(top: 20),
                     alignment: Alignment.topCenter,
                       
-                      child: Search(controller: searchController,)
+                      child: Search(
+                        controller: searchController,
+                        searchButtonIcon:searchController.text != "" ?searchButtonIcon2:searchButtonIcon1,
+                        searchIconButtonFunc: searchController.text!=""?searchControllerClear:null,
+                      )
                   ),
 
                   Positioned(
