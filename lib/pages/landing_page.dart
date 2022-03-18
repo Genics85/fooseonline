@@ -13,22 +13,20 @@ import 'package:fooseonline/payment/paystack_payment.dart';
 
 
 class LandingPage extends StatefulWidget {
-  const LandingPage({Key? key}) : super(key: key);
+
+   LandingPage({Key? key}) : super(key: key);
 
   @override
   _LandingPageState createState() => _LandingPageState();
 }
 
 class _LandingPageState extends State<LandingPage> {
+
   String email="eugeneamo85@gmail.com";
 
-  List  firebaseSnapshots=[
-    FirebaseFirestore.instance.collection("posts").where("sex", whereIn: ["Male","Female"]).snapshots(),
-    FirebaseFirestore.instance.collection("posts").where("sex",isEqualTo: "Male").snapshots(),
-    FirebaseFirestore.instance.collection("posts").where("sex", isEqualTo:"Female").snapshots(),
-    FirebaseFirestore.instance.collection("posts").where("sex", isEqualTo: "Kids").snapshots()
-  ];
+  TextEditingController searchController=TextEditingController();
 
+  
   int selectedButton=0;
   int unisexIndex=0;
   int maleIndex=1;
@@ -41,9 +39,38 @@ class _LandingPageState extends State<LandingPage> {
     "images/females.jpg",
     "images/kids.jpg",
   ];
+
+  _onSearchChange(){
+    setState(() {
+      selectedButton=4;
+    });
+  }
+
+  @override
+  void initState() {
+    searchController.addListener(_onSearchChange);
+    super.initState();
+
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    searchController.dispose();
+    searchController.removeListener(_onSearchChange);
+  }
   
   @override
   Widget build(BuildContext context) {
+
+    List  firebaseSnapshots=[
+      FirebaseFirestore.instance.collection("posts").where("sex", whereIn: ["Male","Female"]).snapshots(),
+      FirebaseFirestore.instance.collection("posts").where("sex",isEqualTo: "Male").snapshots(),
+      FirebaseFirestore.instance.collection("posts").where("sex", isEqualTo:"Female").snapshots(),
+      FirebaseFirestore.instance.collection("posts").where("sex", isEqualTo: "Kids").snapshots(),
+      FirebaseFirestore.instance.collection("posts").where("name", isEqualTo:searchController.text).snapshots()
+    ];
+
     return SafeArea(
       child: Scaffold(
 
@@ -141,7 +168,8 @@ class _LandingPageState extends State<LandingPage> {
                   Container(
                     padding: EdgeInsets.only(top: 20),
                     alignment: Alignment.topCenter,
-                      child: Search()
+                      
+                      child: Search(controller: searchController,)
                   ),
 
                   Positioned(
