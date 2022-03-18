@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fooseonline/pages/cart_page.dart';
 import 'package:fooseonline/pages/landing_page.dart';
 
 void main() async {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Welcome to Flutter',
-      home: LandingPage()
+      home: LandingPage(),
     );
   }
 }

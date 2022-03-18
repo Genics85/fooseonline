@@ -8,8 +8,8 @@ import 'package:fooseonline/assets/buy_more_button.dart';
 import 'package:fooseonline/assets/buy_now_button.dart';
 import 'package:fooseonline/assets/contact_dialog.dart';
 import 'package:fooseonline/assets/search_space.dart';
+import 'package:fooseonline/pages/cart_page.dart';
 import 'package:fooseonline/payment/paystack_payment.dart';
-
 
 
 class LandingPage extends StatefulWidget {
@@ -26,7 +26,6 @@ class _LandingPageState extends State<LandingPage> {
 
   TextEditingController searchController=TextEditingController();
 
-
   Icon searchButtonIcon1=Icon(Icons.search,color: Colors.black45,);
   Icon searchButtonIcon2=Icon(Icons.cancel_outlined,color: Colors.black45,);
 
@@ -35,6 +34,7 @@ class _LandingPageState extends State<LandingPage> {
   int maleIndex=1;
   int femaleIndex=2;
   int kidsIndex=3;
+
 
   List <String> img=[
     "images/unisex.jpg",
@@ -53,24 +53,27 @@ class _LandingPageState extends State<LandingPage> {
         selectedButton=unisexIndex;
       });
     }
-
   }
 
   searchControllerClear(){
     setState(() {
       searchController.text="";
     });
-
   }
 
   @override
   void initState() {
     searchController.addListener(_onSearchChange);
     super.initState();
-
   }
 
-  
+  @override
+  void dispose() {
+    super.dispose();
+    searchController.dispose();
+    searchController.removeListener(_onSearchChange);
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -84,7 +87,6 @@ class _LandingPageState extends State<LandingPage> {
 
     return SafeArea(
       child: Scaffold(
-
         body: StreamBuilder<Object>(
           stream: firebaseSnapshots[selectedButton],
           builder: (BuildContext context,AsyncSnapshot snapshot) {
@@ -131,14 +133,11 @@ class _LandingPageState extends State<LandingPage> {
                                           borderRadius: BorderRadius.only(topLeft: const Radius.circular(20), topRight: const Radius.circular(20)),
                                           color: Colors.grey,
                                           image: DecorationImage(image: NetworkImage("${snapshot.data.docs[index]["imageUrl"]}"),
-
-                                              //     .collection("posts")
-                                              // .where("sex", "==", "Kids")
-
                                           fit: BoxFit.cover
                                           )
                                       ),
                                     ),
+
                                     const SizedBox(height: 10,),
 
                                     Container(
@@ -177,14 +176,28 @@ class _LandingPageState extends State<LandingPage> {
                         );
                       }),
                   Container(
-                    padding: EdgeInsets.only(top: 20),
-                    alignment: Alignment.topCenter,
-                      
+                    padding: EdgeInsets.only(top: 20,left: 10),
+                    alignment: Alignment.topLeft,
+
                       child: Search(
                         controller: searchController,
                         searchButtonIcon:searchController.text != "" ?searchButtonIcon2:searchButtonIcon1,
                         searchIconButtonFunc: searchController.text!=""?searchControllerClear:null,
                       )
+                  ),
+                  Positioned(
+                    right: 5,
+                    top: 10,
+                    child: IconButton(
+                        onPressed: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const CartPage()
+                            ),
+                          );
+                        },
+                        icon: Icon(Icons.shopping_cart_outlined,color: Colors.black,size: 40,)
+                    ),
                   ),
 
                   Positioned(

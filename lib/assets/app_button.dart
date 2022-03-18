@@ -3,7 +3,13 @@ import 'package:flutter/material.dart';
 class Buttons extends StatelessWidget {
   String img;
   Color color;
-   Buttons({Key? key, required this.img, this.color=Colors.amber}) : super(key: key);
+
+   Buttons(
+       {Key? key,
+         required this.img,
+         this.color=Colors.amber,
+
+       }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

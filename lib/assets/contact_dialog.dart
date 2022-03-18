@@ -38,14 +38,14 @@ class ContactDialog{
                   Contact().openPhone();
                 },
                 child: Container(
-                  height: 80,
-                  width: 80,
+                  height: 60,
+                  width: 60,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                      color: Colors.grey.shade200,
-
+                      borderRadius: BorderRadius.circular(15),
+                      image: DecorationImage(
+                          image: AssetImage("images/phoneLogo.jpg")
+                      )
                   ),
-                  child: Icon(Icons.phone_forwarded,size: 40,color: Colors.blue,),
                 ),
              )
             ],
@@ -62,41 +62,10 @@ class ContactDialog{
             },
               child: AppText(text: "Cancel",color: Colors.red,),) ,
           ),
-
         ],
         elevation: 24,
         backgroundColor: Colors.white,
       );
     });
   }
-
-
 }
-
-
-
-
-// class ContactDialog extends StatefulWidget {
-//   const ContactDialog({Key? key}) : super(key: key);
-//
-//   @override
-//   _ContactDialogState createState() => _ContactDialogState();
-// }
-//
-// class _ContactDialogState extends State<ContactDialog> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return AlertDialog(
-//       title: AppText(text:"Contact us on:"),
-//       content: Text("do you accept"),
-//       actions: [
-//         TextButton(onPressed: () {  },
-//         child: AppText(text: "yes",),),
-//         TextButton(onPressed: () {  },
-//           child: AppText(text: "no",),)
-//       ],
-//       elevation: 24,
-//       backgroundColor: Colors.blue,
-//     );
-//   }
-// }
