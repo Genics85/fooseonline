@@ -188,15 +188,33 @@ class _LandingPageState extends State<LandingPage> {
                   Positioned(
                     right: 5,
                     top: 10,
-                    child: IconButton(
-                        onPressed: (){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => const CartPage()
+                    child: Stack(
+                      children: [
+                        IconButton(
+                          onPressed: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const CartPage()
+                              ),
+                            );
+                          },
+                          icon: Icon(Icons.shopping_cart_outlined,color: Colors.black,size: 40,)
+                      ),
+                        Positioned(
+                          top: 5,
+                          right: 1,
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: 16,
+                            height: 16,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              color: Colors.red
                             ),
-                          );
-                        },
-                        icon: Icon(Icons.shopping_cart_outlined,color: Colors.black,size: 40,)
+                            child: AppText(text: "22",color: Colors.white,size: 10,),
+                          ),
+                        )
+                      ],
                     ),
                   ),
 
