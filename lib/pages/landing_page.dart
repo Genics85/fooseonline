@@ -171,30 +171,38 @@ class _LandingPageState extends State<LandingPage> {
                                                     MakePayment(ctx: context,email: email,price: 40).chargeCardAndMakePayment();
                                                   },
                                                   child: BuyNowButton()),
-
-                                              GestureDetector(
-                                                onTap:(){
-
-                                                  Provider.of<CartModel>(context,listen: false)
-                                                      .addToCartItems(
-                                                      "${snapshot.data.docs[index]["name"]}",
-                                                      "${snapshot.data.docs[index]["imageUrl"]}",
-                                                      "${snapshot.data.docs[index]["price"]}",
-                                                        index
+                                              
+                                              Consumer<CartModel>(
+                                                builder: (context,cartModel,child){
+                                                  return GestureDetector(
+                                                      onTap:(){
+                                                        if(cartModel.cartItemsUrl.contains(snapshot.data.docs[index]["imageUrl"])){
+                                                          cartModel.removeFromCartItems(
+                                                              "${snapshot.data.docs[index]["name"]}",
+                                                              "${snapshot.data.docs[index]["imageUrl"]}",
+                                                              "${snapshot.data.docs[index]["price"]}"
+                                                          );
+                                                        }
+                                                        else{
+                                                          cartModel.addToCartItems(
+                                                              "${snapshot.data.docs[index]["name"]}",
+                                                              "${snapshot.data.docs[index]["imageUrl"]}",
+                                                              "${snapshot.data.docs[index]["price"]}"
+                                                          );
+                                                        }
+                                                      },
+                                                      child:Consumer<CartModel>(
+                                                        builder: (context,cartModel,child){
+                                                          return BuyMoreButton(
+                                                            buttonBorderColor:cartModel.cartItemsUrl.contains(snapshot.data.docs[index]["imageUrl"])?AppColors.activeBuyMore:Colors.black,
+                                                            buttonColor:cartModel.cartItemsUrl.contains(snapshot.data.docs[index]["imageUrl"])?AppColors.activeBuyMore:Colors.white,
+                                                            textColor:cartModel.cartItemsUrl.contains(snapshot.data.docs[index]["imageUrl"])?Colors.white:Colors.black,
+                                                            shadowColor:cartModel.cartItemsUrl.contains(snapshot.data.docs[index]["imageUrl"])?AppColors.activeBuyMore:Colors.grey,
+                                                          );
+                                                        },
+                                                      )
                                                   );
                                                 },
-                                                  child:Consumer<CartModel>(
-                                                    builder: (context,cartModel,child){
-                                                      return BuyMoreButton(
-                                                        buttonBorderColor:cartModel.cartItemsUrl.contains(snapshot.data.docs[index]["imageUrl"])?AppColors.activeBuyMore:Colors.black,
-                                                        buttonColor:cartModel.cartItemsUrl.contains(snapshot.data.docs[index]["imageUrl"])?AppColors.activeBuyMore:Colors.white,
-                                                        textColor:cartModel.cartItemsUrl.contains(snapshot.data.docs[index]["imageUrl"])?Colors.white:Colors.black,
-                                                        shadowColor:cartModel.cartItemsUrl.contains(snapshot.data.docs[index]["imageUrl"])?AppColors.activeBuyMore:Colors.grey,
-                                                      );
-                                                    },
-                                                  )
-
-
                                               )
                                             ],
                                           )

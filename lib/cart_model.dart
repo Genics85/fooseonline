@@ -6,12 +6,11 @@ class CartModel with ChangeNotifier{
   List cartItemsUrls=[];
   List cartItemsPrices=[];
   bool _addedToCart=true;
-  List itemsAddedIndexes=[];
+
 
   List get cartItemsName => cartItemsNames;
   List get cartItemsUrl => cartItemsUrls;
   List get cartItemPrice => cartItemsPrices;
-  List get addedIndex=>itemsAddedIndexes;
   bool get addedToCart => _addedToCart;
 
   addToCartBool(){
@@ -19,19 +18,17 @@ class CartModel with ChangeNotifier{
     notifyListeners();
   }
 
-  addToCartItems(String itemName,String itemUrl, String itemPrice,int index){
+  addToCartItems(String itemName,String itemUrl, String itemPrice){
     cartItemsNames.add(itemName);
     cartItemsUrls.add(itemUrl);
     cartItemsPrices.add(itemPrice);
-    itemsAddedIndexes.add(index);
     notifyListeners();
   }
 
-  removeFromCartItems(String itemName,String itemUrl, String itemPrice, int index){
+  removeFromCartItems(String itemName,String itemUrl, String itemPrice){
     cartItemsNames.remove(itemName);
     cartItemsUrls.remove(itemUrl);
     cartItemsPrices.remove(itemPrice);
-    itemsAddedIndexes.remove(index);
     notifyListeners();
   }
 }
