@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
-
 import 'app_text.dart';
 
 class BuyMoreButton extends StatelessWidget {
-  const BuyMoreButton({Key? key}) : super(key: key);
+   const BuyMoreButton({
+     Key? key,
+    required this.buttonColor,
+    required this.buttonBorderColor,
+     required this.textColor,
+     required this.shadowColor
+   }) : super(key: key);
+
+  final Color buttonColor;
+  final Color buttonBorderColor;
+  final Color textColor;
+  final Color shadowColor;
 
   @override
   Widget build(BuildContext context) {
@@ -13,14 +23,14 @@ class BuyMoreButton extends StatelessWidget {
       height: 40,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Colors.white,
+          color: buttonColor,
           border: Border.all(
-              color: Colors.black,
+              color: buttonBorderColor,
               width: 1.5
           ),
           boxShadow: [
             BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
+                color: shadowColor.withOpacity(0.5),
                 spreadRadius: 2,
                 blurRadius: 4,
                 offset: Offset(0,3)
@@ -28,7 +38,7 @@ class BuyMoreButton extends StatelessWidget {
           ]
 
       ),
-      child: AppText(text: "Buy + More",color: Colors.black,size: 14,),
+      child: AppText(text: "Buy + More",color: textColor,size: 14,),
     );
   }
 }

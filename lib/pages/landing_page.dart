@@ -8,8 +8,10 @@ import 'package:fooseonline/assets/buy_more_button.dart';
 import 'package:fooseonline/assets/buy_now_button.dart';
 import 'package:fooseonline/assets/contact_dialog.dart';
 import 'package:fooseonline/assets/search_space.dart';
+import 'package:fooseonline/cart_model.dart';
 import 'package:fooseonline/pages/cart_page.dart';
 import 'package:fooseonline/payment/paystack_payment.dart';
+import 'package:provider/provider.dart';
 
 
 class LandingPage extends StatefulWidget {
@@ -35,6 +37,13 @@ class _LandingPageState extends State<LandingPage> {
   int femaleIndex=2;
   int kidsIndex=3;
 
+  bool addedToCart=false;
+
+  addToCart(int selectedItemIndex){
+    setState(() {
+      addedToCart=!addedToCart;
+    });
+  }
 
   List <String> img=[
     "images/unisex.jpg",
@@ -162,7 +171,31 @@ class _LandingPageState extends State<LandingPage> {
                                                     MakePayment(ctx: context,email: email,price: 40).chargeCardAndMakePayment();
                                                   },
                                                   child: BuyNowButton()),
-                                              BuyMoreButton()
+
+                                              GestureDetector(
+                                                onTap:(){
+
+                                                  Provider.of<CartModel>(context,listen: false)
+                                                      .addToCartItems(
+                                                      "${snapshot.data.docs[index]["name"]}",
+                                                      "${snapshot.data.docs[index]["imageUrl"]}",
+                                                      "${snapshot.data.docs[index]["price"]}",
+                                                        index
+                                                  );
+                                                },
+                                                  child:Consumer<CartModel>(
+                                                    builder: (context,cartModel,child){
+                                                      return BuyMoreButton(
+                                                        buttonBorderColor:cartModel.cartItemsUrl.contains(snapshot.data.docs[index]["imageUrl"])?AppColors.activeBuyMore:Colors.black,
+                                                        buttonColor:cartModel.cartItemsUrl.contains(snapshot.data.docs[index]["imageUrl"])?AppColors.activeBuyMore:Colors.white,
+                                                        textColor:cartModel.cartItemsUrl.contains(snapshot.data.docs[index]["imageUrl"])?Colors.white:Colors.black,
+                                                        shadowColor:cartModel.cartItemsUrl.contains(snapshot.data.docs[index]["imageUrl"])?AppColors.activeBuyMore:Colors.grey,
+                                                      );
+                                                    },
+                                                  )
+
+
+                                              )
                                             ],
                                           )
                                         ],
@@ -211,7 +244,12 @@ class _LandingPageState extends State<LandingPage> {
                               borderRadius: BorderRadius.circular(100),
                               color: Colors.red
                             ),
-                            child: AppText(text: "22",color: Colors.white,size: 10,),
+                            child:Consumer<CartModel>(
+                              builder:(context,cartModel,child){
+                                return AppText(text:"${cartModel.cartItemsName.length}",color: Colors.white,size: 10,);
+                              },
+                            )
+
                           ),
                         )
                       ],
