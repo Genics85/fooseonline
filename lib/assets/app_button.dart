@@ -7,7 +7,7 @@ class Buttons extends StatelessWidget {
    Buttons(
        {Key? key,
          required this.img,
-         this.color=Colors.amber,
+         this.color=Colors.green,
 
        }) : super(key: key);
 

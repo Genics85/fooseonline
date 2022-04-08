@@ -10,7 +10,7 @@ import 'package:fooseonline/assets/contact_dialog.dart';
 import 'package:fooseonline/assets/search_space.dart';
 import 'package:fooseonline/cart_model.dart';
 import 'package:fooseonline/pages/cart_page.dart';
-import 'package:fooseonline/payment/paystack_payment.dart';
+import 'package:fooseonline/payment/flutterwave.dart';
 import 'package:provider/provider.dart';
 
 
@@ -26,6 +26,8 @@ class _LandingPageState extends State<LandingPage> {
 
   String email="eugeneamo85@gmail.com";
 
+  FlutterWavePayment payment=FlutterWavePayment();
+
   TextEditingController searchController=TextEditingController();
 
   Icon searchButtonIcon1=Icon(Icons.search,color: Colors.black45,);
@@ -36,14 +38,6 @@ class _LandingPageState extends State<LandingPage> {
   int maleIndex=1;
   int femaleIndex=2;
   int kidsIndex=3;
-
-  bool addedToCart=false;
-
-  addToCart(int selectedItemIndex){
-    setState(() {
-      addedToCart=!addedToCart;
-    });
-  }
 
   List <String> img=[
     "images/unisex.jpg",
@@ -166,9 +160,8 @@ class _LandingPageState extends State<LandingPage> {
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
                                               GestureDetector(
-                                                  onTap:(){
-                                                    debugPrint("buy tapper");
-                                                    MakePayment(ctx: context,email: email,price: 40).chargeCardAndMakePayment();
+                                                  onTap:() {
+                                                    payment.makePayment(context);
                                                   },
                                                   child: BuyNowButton()),
                                               
@@ -176,6 +169,7 @@ class _LandingPageState extends State<LandingPage> {
                                                 builder: (context,cartModel,child){
                                                   return GestureDetector(
                                                       onTap:(){
+
                                                         if(cartModel.cartItemsUrl.contains(snapshot.data.docs[index]["imageUrl"])){
                                                           cartModel.removeFromCartItems(
                                                               "${snapshot.data.docs[index]["name"]}",
@@ -254,7 +248,7 @@ class _LandingPageState extends State<LandingPage> {
                             ),
                             child:Consumer<CartModel>(
                               builder:(context,cartModel,child){
-                                return AppText(text:"${cartModel.cartItemsName.length}",color: Colors.white,size: 10,);
+                                return AppText(text:"${cartModel.cartItemsUrl.length}",color: Colors.white,size: 10,);
                               },
                             )
 

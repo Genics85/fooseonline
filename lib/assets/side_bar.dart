@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fooseonline/assets/contact_dialog.dart';
 import 'package:fooseonline/assets/post.dart';
-import 'package:state_set/state_set.dart';
+
 
 
 class SideBar extends StatefulWidget {
@@ -19,7 +19,7 @@ class SideBar extends StatefulWidget {
   _SideBarState createState() => _SideBarState();
 }
 
-class _SideBarState extends State<SideBar> with StateSet {
+class _SideBarState extends State<SideBar> {
   SideBar obj=SideBar();
 
   @override
