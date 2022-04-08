@@ -13,7 +13,7 @@ class FlutterWavePayment with ChangeNotifier{
           encryptionKey: "3f71e3c9a1fdd61411d18b63",
           publicKey: "FLWPUBK-7182149d239dfa6f2038dc638a8297f5-X",
           currency: currency,
-          amount: "1",
+          amount: "5",
           email: "eugeneamo85@gmail.com",
           fullName: "Valid Full Name",
           txRef: "reference",

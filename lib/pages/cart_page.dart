@@ -79,8 +79,14 @@ class _CartPageState extends State<CartPage> {
                             trailing: IconButton(
                               icon: Icon(Icons.cancel,color: Colors.redAccent,),
                               onPressed: () {
-                                cartModel.removeFromCartItems("${cartModel.cartItemsName[index]}",
-                                    "${cartModel.cartItemsUrl[index]}", "GHc ${cartModel.cartItemPrice[index]}");
+
+                                cartModel.subtractTotalAmount(int.parse("${cartModel.cartItemPrice[index]}"));
+
+                                cartModel.removeFromCartItems(
+                                    "${cartModel.cartItemsName[index]}",
+                                    "${cartModel.cartItemsUrl[index]}",
+                                    "${cartModel.cartItemPrice[index]}"
+                                );
                               },
                             ),
                           ),
@@ -96,7 +102,7 @@ class _CartPageState extends State<CartPage> {
                             minimumSize: Size(double.maxFinite,50),
                             primary: AppColors.appBarColor,
                           ),
-                          child: AppText(text: "CHECKOUT ${cartModel.totalAmountCalculator()} ",color: Colors.white,size: 18,)
+                          child: AppText(text: "CHECKOUT GHc ${cartModel.totalAmount} ",color: Colors.white,size: 18,)
                       ),
                     )
                   ],

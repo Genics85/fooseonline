@@ -176,6 +176,9 @@ class _LandingPageState extends State<LandingPage> {
                                                               "${snapshot.data.docs[index]["imageUrl"]}",
                                                               "${snapshot.data.docs[index]["price"]}"
                                                           );
+
+                                                          cartModel.subtractTotalAmount(int.parse("${snapshot.data.docs[index]["price"]}"));
+
                                                         }
                                                         else{
                                                           cartModel.addToCartItems(
@@ -183,6 +186,8 @@ class _LandingPageState extends State<LandingPage> {
                                                               "${snapshot.data.docs[index]["imageUrl"]}",
                                                               "${snapshot.data.docs[index]["price"]}"
                                                           );
+
+                                                          cartModel.addTotalAmount(int.parse("${snapshot.data.docs[index]["price"]}"));
                                                         }
                                                       },
                                                       child:Consumer<CartModel>(
