@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterwave/core/flutterwave.dart';
+import 'package:flutterwave/models/responses/charge_response.dart';
+import 'package:flutterwave/utils/flutterwave_currency.dart';
 import 'package:fooseonline/assets/app_button.dart';
 import 'package:fooseonline/assets/app_color.dart';
 import 'package:fooseonline/assets/app_text.dart';
@@ -151,7 +154,7 @@ class _LandingPageState extends State<LandingPage> {
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
                                               AppText(text:"Size:${snapshot.data.docs[index]["size"]}",size: 18,),
-                                              AppText(text: "GHc:${snapshot.data.docs[index]["price"]} ",color: Colors.red,)
+                                              AppText(text: "GH₵:${snapshot.data.docs[index]["price"]} ",color: Colors.red,)
                                             ],
                                           ),
                                           const SizedBox(height: 20,),
@@ -161,7 +164,11 @@ class _LandingPageState extends State<LandingPage> {
                                             children: [
                                               GestureDetector(
                                                   onTap:() {
-                                                    payment.makePayment(context);
+                                                   payment.makePayment(
+                                                       context,
+                                                       "${snapshot.data.docs[index]["price"]}",
+                                                       "${snapshot.data.docs[index]["imageUrl"]}"
+                                                   );
                                                   },
                                                   child: BuyNowButton()),
                                               

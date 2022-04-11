@@ -3,6 +3,7 @@ import 'package:fooseonline/assets/app_color.dart';
 import 'package:provider/provider.dart';
 import '../assets/app_text.dart';
 import '../cart_model.dart';
+import '../payment/flutterwave.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -12,6 +13,8 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+
+FlutterWavePayment payment=FlutterWavePayment();
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +78,7 @@ class _CartPageState extends State<CartPage> {
                           child: ListTile(
                             leading: Image(image:NetworkImage(cartModel.cartItemsUrl[index])),
                             title: AppText(text:"${cartModel.cartItemsName[index]}",color: Colors.black,),
-                            subtitle: AppText(text:"GHc ${cartModel.cartItemPrice[index]}"),
+                            subtitle: AppText(text:"GH₵ ${cartModel.cartItemPrice[index]}"),
                             trailing: IconButton(
                               icon: Icon(Icons.cancel,color: Colors.redAccent,),
                               onPressed: () {
@@ -97,12 +100,18 @@ class _CartPageState extends State<CartPage> {
                     Container(
                       alignment: Alignment.bottomCenter,
                       child: ElevatedButton(
-                          onPressed: (){},
+                          onPressed: (){
+                            payment.makePayment(
+                                context,
+                                "${cartModel.totalAmount}",
+                                "${cartModel.cartItemsUrl}"
+                            );
+                          },
                           style: ElevatedButton.styleFrom(
                             minimumSize: Size(double.maxFinite,50),
                             primary: AppColors.appBarColor,
                           ),
-                          child: AppText(text: "CHECKOUT GHc ${cartModel.totalAmount} ",color: Colors.white,size: 18,)
+                          child: AppText(text: "CHECKOUT GH₵ ${cartModel.totalAmount} ",color: Colors.white,size: 18,)
                       ),
                     )
                   ],

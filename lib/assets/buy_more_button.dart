@@ -38,7 +38,7 @@ class BuyMoreButton extends StatelessWidget {
           ]
 
       ),
-      child: AppText(text: "Buy + More",color: textColor,size: 14,),
+      child: AppText(text: "Add to Cart",color: textColor,size: 14,),
     );
   }
 }
