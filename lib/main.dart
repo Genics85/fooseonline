@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fooseonline/assets/splash_screen.dart';
 import 'package:fooseonline/cart_model.dart';
 import 'package:fooseonline/pages/landing_page.dart';
 import 'package:provider/provider.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +25,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Welcome to Flutter',
-      home: LandingPage(),
+      home: AnimatedSplashScreen(
+        splash: SplashScreen(),
+        
+        splashTransition: SplashTransition.fadeTransition,
+
+        splashIconSize: 200,
+
+        duration: 3000,
+
+         nextScreen: LandingPage()
+         ),
     );
   }
 }

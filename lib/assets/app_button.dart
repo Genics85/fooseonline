@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class Buttons extends StatelessWidget {
   String img;
   Color color;
-
+  
    Buttons(
        {Key? key,
          required this.img,
-         this.color=Colors.green,
+         this.color=Colors.grey,
 
        }) : super(key: key);
 
@@ -18,7 +18,7 @@ class Buttons extends StatelessWidget {
       width: 50,
       height:50,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(11),
+          shape: BoxShape.circle,
           color:color,
           image: DecorationImage(
               image: AssetImage("images/"+ img)

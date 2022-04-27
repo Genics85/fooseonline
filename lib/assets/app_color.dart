@@ -4,8 +4,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class AppColors{
-   static Color activeButton=Colors.green.withOpacity(0.7);
-   static Color inActiveButton=Colors.grey.withOpacity(0.3);
+   static Color activeButton=Color.fromARGB(255, 83, 83, 83);
+   static Color inActiveButton=Color.fromARGB(255, 201, 200, 200);
    static Color activeBuyMore=Colors.green;
    static Color inactiveBuyMore=Colors.white;
    static Color appBarColor=Colors.green;

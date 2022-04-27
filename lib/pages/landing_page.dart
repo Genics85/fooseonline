@@ -327,7 +327,11 @@ class _LandingPageState extends State<LandingPage> {
                               onTap: (){
                                 return ContactDialog().createContactDialog(context);
                               },
-                              child: Buttons(img:"phone.png",))
+                              child: Buttons(
+                                img:"phone.png",
+                                color:Color.fromARGB(255, 201, 200, 200)
+                              )
+                              )
                         ],
                       )
                     ),
