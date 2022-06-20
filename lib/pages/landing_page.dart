@@ -79,7 +79,7 @@ class _LandingPageState extends State<LandingPage> {
     searchController.dispose();
     searchController.removeListener(_onSearchChange);
   }
-
+  String dropDownSizeValue="L";
   @override
   Widget build(BuildContext context) {
 
@@ -171,7 +171,7 @@ class _LandingPageState extends State<LandingPage> {
                                                    );
                                                   },
                                                   child: BuyNowButton()),
-                                              
+
                                               Consumer<CartModel>(
                                                 builder: (context,cartModel,child){
                                                   return GestureDetector(
@@ -200,6 +200,7 @@ class _LandingPageState extends State<LandingPage> {
                                                       child:Consumer<CartModel>(
                                                         builder: (context,cartModel,child){
                                                           return BuyMoreButton(
+                                                            caption:cartModel.cartItemsUrl.contains(snapshot.data.docs[index]["imageUrl"])?"Remove from cart":"Add to cart",
                                                             buttonBorderColor:cartModel.cartItemsUrl.contains(snapshot.data.docs[index]["imageUrl"])?AppColors.activeBuyMore:Colors.black,
                                                             buttonColor:cartModel.cartItemsUrl.contains(snapshot.data.docs[index]["imageUrl"])?AppColors.activeBuyMore:Colors.white,
                                                             textColor:cartModel.cartItemsUrl.contains(snapshot.data.docs[index]["imageUrl"])?Colors.white:Colors.black,

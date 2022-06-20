@@ -7,9 +7,10 @@ class BuyMoreButton extends StatelessWidget {
     required this.buttonColor,
     required this.buttonBorderColor,
      required this.textColor,
-     required this.shadowColor
+     required this.shadowColor,
+     required this.caption
    }) : super(key: key);
-
+  final String caption;
   final Color buttonColor;
   final Color buttonBorderColor;
   final Color textColor;
@@ -38,7 +39,7 @@ class BuyMoreButton extends StatelessWidget {
           ]
 
       ),
-      child: AppText(text: "Add to Cart",color: textColor,size: 14,),
+      child: AppText(text: caption,color: textColor,size: 14,),
     );
   }
 }
